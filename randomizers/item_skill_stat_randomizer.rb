@@ -84,11 +84,10 @@ module ItemSkillStatRandomizer
           item["Equippable by"].value = rng.rand(1..3) if GAME == "por"
           if item.name == "Master Ring"
             item["Equippable by"].value |= 1 # Always let Jonathan use Master Ring
-            if options[:allow_mastering_charlottes_skills]
-              item["Equippable by"].value |= 2 # Always let Charlotte use Master Ring too, if she can master skills.
-            end
+            item["Equippable by"].value |= 2 # Always let Charlotte use Master Ring
           end
           if item.name == "Sorceress Crest"
+            item["Equippable by"].value |= 1 # Always let Jonathan use Sorceress Crest
             item["Equippable by"].value |= 2 # Always let Charlotte use Sorceress Crest
           end
         end
@@ -604,35 +603,31 @@ module ItemSkillStatRandomizer
     end
     
     if GAME == "por" && skill["Type"] == 0
-      skills_that_must_be_used_by_original_player = [
-        "Puppet Master", # Charlotte can use it but the timing would be different due to charging it up
-        "Stonewall",
-        "Gnebu",
-        "Wrecking Ball",
-        "Rampage",
+      #These skills will always be equippable by both characters
+      progression_skills = [
+        "Puppet Master",
         "Toad Morph",
         "Owl Morph",
         "Speed Up",
-        "Berserker",
-        "STR Boost",
-        "CON Boost",
-        "INT Boost",
-        "MIND Boost",
-        "LUCK Boost",
-        "ALL Boost",
+        "Sanctuary",
       ]
-      
-      unless skills_that_must_be_used_by_original_player.include?(skill.name)
-        # Randomize whether this skill is usable by Jonathan or Charlotte.
-        # Except for the above listed skills, since the wrong character can't actually use them.
-        skill["??? bitfield"][2] = [true, false].sample(random: rng) # Is spell
+      #Check to determine who can use it. If bit 6 is true, equppable by Johnathn, if bit 7 is true, equippable by Charlotte
+      partner = [true, false].sample(random: rng)
+      skill["??? bitfield"][6] = partner
+      skill["??? bitfield"][7] = !(partner)
+
+      #Ensure all progression skills are equippable by both characters
+      if progression_skills.include? skill.name
+        skill["??? bitfield"][6] = true
+        skill["??? bitfield"][7] = true     
       end
-      
-      # Set either the sub or spell bit in the damage types bitfield to let enemies know what this is now.
-      is_spell = skill["??? bitfield"][2]
-      is_sub = !is_spell
-      skill["Effects"][25] = is_sub   # "Is a subweapon" bit
-      skill["Effects"][26] = is_spell # "Is a spell" bit
+
+      #If disable speed up is true, ensure it isn't equippable by either character
+      if skill.name == "Speed Up" && options[:disable_speed_up]
+        skill["??? bitfield"][6] = false
+        skill["??? bitfield"][7] = false
+        puts "Speed Up Disabled!"  
+      end
     end
     
     case GAME
@@ -656,7 +651,12 @@ module ItemSkillStatRandomizer
         is_spell = skill["??? bitfield"][2]
         if is_spell
           if progress_skill
-            charge_time = (skill_extra_data["Max at once/Spell charge"] >> 4)
+            if skill.name == "Sanctuary" && options[:fast_cast_sanctuary]
+              charge_time = 0x0006 >> 4
+              puts "Fast Cast Sanc Enabled"
+            else
+              charge_time = (skill_extra_data["Max at once/Spell charge"] >> 4)
+            end
           else
             charge_time = named_rand_range_weighted(:spell_charge_time_range)
           end

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>820</width>
-    <height>710</height>
+    <width>1134</width>
+    <height>857</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -415,8 +415,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>778</width>
-            <height>464</height>
+            <width>1076</width>
+            <height>524</height>
            </rect>
           </property>
           <layout class="QFormLayout" name="formLayout_5">
@@ -573,20 +573,10 @@
           <string>Portrait of Ruin</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="fix_infinite_quest_rewards">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="por_short_mode">
             <property name="text">
-             <string>Fix infinite quest rewards bug</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QCheckBox" name="always_show_drop_percentages">
-            <property name="text">
-             <string>Always have Gambler Glasses effect</string>
+             <string>Short Mode</string>
             </property>
            </widget>
           </item>
@@ -600,17 +590,37 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="por_short_mode">
-            <property name="text">
-             <string>Short Mode</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QCheckBox" name="skip_emblem_drawing">
             <property name="text">
              <string>Skip emblem drawing</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="always_show_drop_percentages">
+            <property name="text">
+             <string>Always have Gambler Glasses effect</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="fix_infinite_quest_rewards">
+            <property name="text">
+             <string>Fix infinite quest rewards bug</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="allow_mastering_charlottes_skills">
+            <property name="text">
+             <string>Allow Charlotte to master skills</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -627,13 +637,17 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="allow_mastering_charlottes_skills">
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="fast_cast_sanctuary">
             <property name="text">
-             <string>Allow Charlotte to master skills</string>
+             <string>Fast Cast on Sanctuary</string>
             </property>
-            <property name="checked">
-             <bool>true</bool>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QCheckBox" name="disable_speed_up">
+            <property name="text">
+             <string>Disable Speed Up</string>
             </property>
            </widget>
           </item>

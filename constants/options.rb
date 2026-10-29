@@ -60,6 +60,8 @@ OPTIONS = {
   fix_infinite_quest_rewards: "Fixes a bug where you could get any quest reward over and over again.",
   always_show_drop_percentages: "Drop chances always display as percentages instead of stars.",
   allow_mastering_charlottes_skills: "Allow Charlotte's skills to gain SP like Jonathan's. When mastered they act fully charged at half charge, and when both mastered and fully charged they act supercharged.",
+  fast_cast_sanctuary: "Allow Charlotte to cast Sanctuary instantly.",
+  disable_speed_up: "Disables the ability for either character to be able to equip Speed Up.",
   
   open_world_map: "Make all areas except Dracula's Castle accessible from the start. (Selecting this disables the World Map Exits Randomizer.)",
   always_dowsing: "Hidden blue chests always make a beeping sound.",
@@ -103,6 +105,8 @@ GAME_SPECIFIC_OPTIONS = {
     :fix_infinite_quest_rewards,
     :always_show_drop_percentages,
     :allow_mastering_charlottes_skills,
+    :fast_cast_sanctuary,
+    :disable_speed_up,
   ],
   "ooe" => [
     :randomize_boss_souls,

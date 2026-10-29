@@ -22,9 +22,9 @@ task :build_installers do
   # Install OCRA gem version 1.3.10, then go to the folder where OCRA was installed in your Ruby installation and edit the file /bin/ocra so that line 26 is `@path = path` instead of `@path = path && path.encode('UTF-8')`.
   
   # Also, OCRA normally places all the source files in the /src directory. In order to make it place them in the base directory, edit /bin/ocra at line 204 to change `SRCDIR = Pathname.new('src')` to `SRCDIR = Pathname.new('.')`.
-  
-  system "C:/Ruby24-x86/bin/ruby ../ocra-1.3.10/bin/ocra dsvrandom.rb --output DSVRandom.exe --no-lzma --chdir-first --innosetup setup_dsvrandom.iss --windows --icon ./images/dsvrandom_icon.ico"
-  system "C:/Ruby24-x64/bin/ruby ../ocra-1.3.10/bin/ocra dsvrandom.rb --output DSVRandom_x64.exe --no-lzma --chdir-first --innosetup setup_dsvrandom_x64.iss --windows --icon ./images/dsvrandom_icon.ico"
+
+  system "C:/Ruby24-x86/bin/ruby C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/ocra-1.3.10/bin/ocra dsvrandom.rb --output DSVRandom.exe --no-lzma --chdir-first --innosetup setup_dsvrandom.iss --windows --icon ./images/dsvrandom_icon.ico"
+  system "C:/Ruby24-x64/bin/ruby C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/ocra-1.3.10/bin/ocra dsvrandom.rb --output DSVRandom_x64.exe --no-lzma --chdir-first --innosetup setup_dsvrandom_x64.iss --windows --icon ./images/dsvrandom_icon.ico"
 end
 
 task :build_releases do

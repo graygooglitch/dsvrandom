@@ -261,6 +261,10 @@ module BossRandomizer
       if boss_entity.room.width < 2
         return false
       end
+      if old_boss.name == "Brauner"
+        # Unspecified Softlock when Medusa appears in Brauner's room, happens on MelonDS specifically, untested on original hardward.
+        return false
+      end
     when "Brauner"
       if boss_entity.room.width < 2
         return false
@@ -602,7 +606,9 @@ module BossRandomizer
       @boss_id_for_each_portrait[:portrait_forgotten_city] = new_boss_id
     when "Brauner"
       @boss_id_inside_studio_portrait = new_boss_id
-      
+      if new_boss.name == "Medusa"
+        puts "Warning: Medusa in Brauner Studio"
+      end
       # Modify the entity hiders in Brauner's room that make the post-Brauner cutscene appear to check the new boss.
       entity_hider = game.entity_by_str("0B-00-00_04")
       entity_hider.subtype = new_boss_index

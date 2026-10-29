@@ -104,6 +104,8 @@ class Randomizer
     
     @int_seed = Digest::MD5.hexdigest(seed).to_i(16)
     @rng = Random.new(@int_seed)
+
+    puts @int_seed
     
     @progression_fill_mode = :random
     @random_fill_mode_max_redos = 15000

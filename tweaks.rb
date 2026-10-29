@@ -5,6 +5,8 @@ module Tweaks
     
     game.fix_unnamed_skills()
     
+    game.apply_armips_patch("#{GAME}_skip_bootup_screens")
+
     if GAME == "dos"
       # Make the drawbridge stay permanently down once the player has lowered it.
       game.apply_armips_patch("dos_drawbridge_stays_down")
@@ -900,6 +902,7 @@ module Tweaks
       end
     end
     
+    
     if GAME == "por" && options[:allow_mastering_charlottes_skills]
       game.apply_armips_patch("por_allow_mastering_spells")
       
@@ -961,6 +964,11 @@ module Tweaks
     if GAME == "por"
       # Fix common enemy creature setting boss death flag.
       game.apply_armips_patch("por_fix_the_creature_boss_death_flag")
+    end
+
+    if GAME == "por" && options[:randomize_skill_behavior]
+      # Apply patch to change skill equip to allow Johnathan to use Spells and Charlotte to use Skills based on ??? Bitfield 7.
+      game.apply_armips_patch("por_Lau_EquipScreenForRandomizer")
     end
     
     if GAME == "por"
@@ -1187,6 +1195,8 @@ module Tweaks
     game.fs.replace_arm_shifted_immediate_integer(MAGICAL_TICKET_X_POS_OFFSET, x_pos)
     game.fs.replace_arm_shifted_immediate_integer(MAGICAL_TICKET_Y_POS_OFFSET, y_pos)
     
+    
+
     case GAME
     when "dos"
       item = game.items[0x2B]
